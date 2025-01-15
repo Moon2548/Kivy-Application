@@ -30,6 +30,9 @@ class MainWidget(Widget):
         if text in self.pressed_keys:
             self.pressed_keys.remove(text)
 
+    def close_app(self):
+        App.get_running_app().stop()
+
 
 class MyApp(App):
     def build(self):
