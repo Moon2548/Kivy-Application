@@ -3,6 +3,8 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.lang import Builder
+import slot
+from slot import game1, game2, game3, game4, game5
 
 Window.maximize()
 Builder.load_file("display_screen.kv")
@@ -13,7 +15,8 @@ class Screenmanager(ScreenManager):
 
 
 class PlayScreen(Screen):
-    pass
+    def play_game1(self):
+        return game1.test()
 
 
 class SettingScreen(Screen):
@@ -22,9 +25,6 @@ class SettingScreen(Screen):
 
 
 class MainScreen(Screen):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-
     def close_app(self):
         App.get_running_app().stop()
 

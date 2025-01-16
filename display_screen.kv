@@ -10,9 +10,14 @@
 
             AccordionItem:
                 title: 'slot 1'
-                Label:
-                    text:'New game'
-                    font_size: 32
+                BoxLayout:
+                    horizontal: 'vertical'
+                    Label:
+                        text:'slot 1'
+                        font_size: 32
+                    Button:
+                        text: 'new game'
+                        on_press: root.play_game1()
             AccordionItem:
                 title: 'slot 2'
                 Label:
@@ -39,7 +44,7 @@
         text: 'Back'
         on_press:
             app.root.current = 'main'
-            root.manager.transition.direction = 'right'
+            root.manager.transition.direction = 'down'
     
 
 <SettingScreen>:
@@ -48,7 +53,7 @@
         orientation: 'vertical'
         Label:
             text: 'Setting'
-            font_size: 50
+            font_size: slider_test.value
             background_color: (1, 1, 1, 1)
             color: (0, 0, 0, 1)
             canvas.before:
@@ -65,11 +70,17 @@
                 id: slider_label
                 font_size: 32
             Slider:
-                min:0
+                id: slider_test
+                min:1
                 max:100
-                value: 0
+                value: 50
                 orientation: 'horizontal'
                 on_value: root.slide_test(*args)
+            BoxLayout:
+                orientation: 'vertical'
+                ProgressBar:
+                    max:100
+                    value: slider_test.value
 
     Button:
         size_hint: 0.1, 0.1
