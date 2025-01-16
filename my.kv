@@ -15,11 +15,30 @@ Screenmanager:
 
 <MainScreen>:
     name: 'main'
+    Label:
+        text:'Slime'
+        pos: 0, root.height * 0.5
+        font_size: 150
+        size_hint: (None, None)
+        size: root.width * 0.3, 400
+        background_color: (1, 1, 0, 0)
+        canvas.before:
+            Color:
+                rgba: self.background_color
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        color: (0 , 1 , 0 , 1)
+        bold: True
+        italic: True
+        outline_color: (0, 0, 1)
+        outline_width: 20
+
     BoxLayout:
         orientation:'vertical'
         size_hint: 0.3, 0.5
-        spacing: 20
-        padding: 40
+        padding: ('20dp', '20dp', '20dp', '20dp')
+        spacing: root.height * 0.01
         Button:
             text: 'Continue'
         Button:
@@ -33,4 +52,4 @@ Screenmanager:
             text: 'Exit'
             on_press: root.close_app()
             background_normal: ''
-            background_color: (238/255, 250/255, 0/255, 1)
+            background_color: (0/255, 0/255, 255/255, 1)
