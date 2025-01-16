@@ -16,7 +16,8 @@ class Screenmanager(ScreenManager):
 
 class PlayScreen(Screen):
     def play_game1(self):
-        return game1.test()
+        App.get_running_app().stop()
+        return game1.Game1().run()
 
 
 class SettingScreen(Screen):
