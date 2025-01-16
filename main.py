@@ -16,6 +16,11 @@ class Screenmanager(ScreenManager):
 
 class PlayScreen(Screen):
     def play_game1(self):
+        with open("slot/slot1.kv", "r") as f:
+            copy = f.read()
+        with open("slot/slot1_copy.kv", "w") as f:
+            f.write(copy)
+        Builder.load_file("slot/slot1_copy.kv")
         App.get_running_app().stop()
         return game1.Game1().run()
 
