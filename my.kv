@@ -6,6 +6,8 @@ Screenmanager:
 <SettingScreen>:
     name: 'setting'
     Button:
+        size_hint: 0.1, 0.1
+        pos: root.width * 0.9, root.height * 0.9
         text: 'Back'
         on_press: 
             app.root.current = 'main'
@@ -15,7 +17,9 @@ Screenmanager:
     name: 'main'
     BoxLayout:
         orientation:'vertical'
-        size: root.width, root.height
+        size_hint: 0.3, 0.5
+        spacing: 20
+        padding: 40
         Button:
             text: 'Continue'
         Button:
