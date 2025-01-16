@@ -15,6 +15,18 @@ Screenmanager:
         on_press: 
             app.root.current = 'main'
             root.manager.transition.direction = 'right'
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+        Label:
+            text: ''
+            id: slider_label
+            font_size: 32
+        Slider:
+            min:0
+            max:100
+            orientation: 'horizontal'
+            on_value: root.slide_test(*args)
 
 <MainScreen>:
     name: 'main'

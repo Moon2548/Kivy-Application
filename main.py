@@ -16,7 +16,8 @@ class PlayScreen(Screen):
 
 
 class SettingScreen(Screen):
-    pass
+    def slide_test(self, *args):
+        self.ids.slider_label.text = "wow" + str(int(args[1]))
 
 
 class MainScreen(Screen):
