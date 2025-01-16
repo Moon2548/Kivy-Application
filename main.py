@@ -11,6 +11,10 @@ class Screenmanager(ScreenManager):
     pass
 
 
+class PlayScreen(Screen):
+    pass
+
+
 class SettingScreen(Screen):
     pass
 

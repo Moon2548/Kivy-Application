@@ -1,7 +1,10 @@
 Screenmanager:
     MainScreen:
     SettingScreen:
+    PlayScreen:
     
+<PlayScreen>:
+    name: 'play'
 
 <SettingScreen>:
     name: 'setting'
@@ -40,9 +43,10 @@ Screenmanager:
         padding: ('20dp', '20dp', '20dp', '20dp')
         spacing: root.height * 0.01
         Button:
-            text: 'Continue'
-        Button:
-            text: 'Newgame'
+            text: 'Play'
+            on_press:
+                app.root.current = 'play'
+                root.manager.transition.direction = 'down'
         Button:
             text: 'Setting'
             on_press:
