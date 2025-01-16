@@ -29,6 +29,9 @@ class SettingScreen(Screen):
     def slide_test(self, *args):
         self.ids.slider_label.text = "wow" + str(int(args[1]))
 
+    def checkbox_click(self, instance, value):
+        print(value)
+
 
 class MainScreen(Screen):
     def close_app(self):
