@@ -5,6 +5,7 @@ from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.lang import Builder
 
 Window.maximize()
+Builder.load_file("display_screen.kv")
 
 
 class Screenmanager(ScreenManager):
