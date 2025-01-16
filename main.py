@@ -28,9 +28,19 @@ class PlayScreen(Screen):
 class SettingScreen(Screen):
     def slide_test(self, *args):
         self.ids.slider_label.text = "wow" + str(int(args[1]))
+        self.ids.setslide.font_size = int(args[1])
 
     def checkbox_click(self, instance, value):
-        print(value)
+        if value == True:
+            print("hi")
+            self.ids.check_label.text = "True"
+        elif value == False:
+            self.ids.check_label.text = "False"
+            print("hello")
+
+    def check_group_click(self, instance, value):
+        if value == True:
+            self.ids.check_group.text = "1"
 
 
 class MainScreen(Screen):

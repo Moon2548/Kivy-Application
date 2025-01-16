@@ -1,9 +1,22 @@
+#:import Factory kivy.factory.Factory
+
+<Readme@Popup>:
+    auto_dismiss: False
+    size_hint: 0.6, 0.2
+    pos_hint: {'x,':0.2, 'top':0.9}
+
+    title: 'Readme'
+    Button:
+        text: 'Close'
+        font_size: 24
+        on_press: root.dismiss()
+
 <PlayScreen>:
     name: 'play'
     BoxLayout:
         orientation: 'vertical'
         size: root.width, root.height
-        padding: 100
+        padding: root.width * 0.1, root.height * 0.1, root.width * 0.1, root.height * 0.1
 
         Accordion:
             orientation: 'vertical'
@@ -15,9 +28,16 @@
                     Label:
                         text:'slot 1'
                         font_size: 32
+                        canvas.before:
+                            Color:
+                                rgba: 1, 0, 0, 1
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
                     Button:
                         text: 'new game'
                         on_press: root.play_game1()
+
             AccordionItem:
                 title: 'slot 2'
                 Label:
@@ -38,6 +58,13 @@
                 Label:
                     text:'New game'
                     font_size: 32
+
+    Button:
+        size_hint: 0.1, 0.1
+        pos: 0, root.height * 0.9
+        text: 'Back'
+        on_press: Factory.Readme().open()
+
     Button:
         size_hint: 0.1, 0.1
         pos: root.width * 0.9, root.height * 0.9
@@ -52,8 +79,9 @@
     BoxLayout:
         orientation: 'vertical'
         Label:
+            id: setslide
             text: 'Setting'
-            font_size: slider_test.value
+            font_size: 50
             background_color: (1, 1, 1, 1)
             color: (0, 0, 0, 1)
             canvas.before:
@@ -82,11 +110,38 @@
                     max:100
                     value: slider_test.value
         GridLayout:
-            cols:2
+            cols:3
             Label:
                 text: 'test'
             CheckBox:
                 on_active: root.checkbox_click(self, self.active)
+            Label:
+                id: check_label
+                text:''
+        GridLayout:
+            cols: 3
+            Label:
+                text: 'group_test'
+            GridLayout:
+                cols: 3
+                Label:
+                    text: 'low'
+                Label:
+                    text: 'medium'
+                Label:
+                    text: 'high'
+                CheckBox:
+                    group: 'graphic_test'
+                    on_active: root.check_group_click(self, self.active)
+                CheckBox:
+                    group: 'graphic_test'
+                    on_active: root.check_group_click(self, self.active)
+                CheckBox:
+                    group: 'graphic_test'
+                    on_active: root.check_group_click(self, self.active)
+            Label:
+                id: check_group
+                text:''
 
     Button:
         size_hint: 0.1, 0.1
