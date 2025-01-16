@@ -8,25 +8,39 @@ Screenmanager:
 
 <SettingScreen>:
     name: 'setting'
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Setting'
+            font_size: 50
+            background_color: (1, 1, 1, 1)
+            color: (0, 0, 0, 1)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+        BoxLayout:
+            orientation: 'horizontal'
+            size: root.width, root.height
+            Label:
+                text: ''
+                id: slider_label
+                font_size: 32
+            Slider:
+                min:0
+                max:100
+                orientation: 'horizontal'
+                on_value: root.slide_test(*args)
+
     Button:
         size_hint: 0.1, 0.1
         pos: root.width * 0.9, root.height * 0.9
         text: 'Back'
-        on_press: 
+        on_press:
             app.root.current = 'main'
             root.manager.transition.direction = 'right'
-    BoxLayout:
-        orientation: 'vertical'
-        size: root.width, root.height
-        Label:
-            text: ''
-            id: slider_label
-            font_size: 32
-        Slider:
-            min:0
-            max:100
-            orientation: 'horizontal'
-            on_value: root.slide_test(*args)
 
 <MainScreen>:
     name: 'main'
