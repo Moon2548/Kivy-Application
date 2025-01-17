@@ -3,8 +3,9 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.lang import Builder
-import slot
 from slot import game1, game2, game3, game4, game5
+import create_character
+from create_character import create_character1
 
 Window.maximize()
 Builder.load_file("display_screen.kv")
@@ -17,12 +18,15 @@ class Screenmanager(ScreenManager):
 class PlayScreen(Screen):
     def play_game1(self):
         with open("slot/slot1.kv", "r") as f:
-            copy = f.read()
-        with open("slot/slot1_copy.kv", "w") as f:
-            f.write(copy)
-        Builder.load_file("slot/slot1_copy.kv")
-        App.get_running_app().stop()
-        return game1.Game1().run()
+            if "Free Slot" in f.read():
+                Builder.load_file("create_character/create_character1.kv")
+                App.get_running_app().stop()
+                create_character1.CreateCharacterRun1().run()
+        # with open("slot/slot1_copy.kv", "w") as f:
+        #     f.write(copy)
+        # Builder.load_file("slot/slot1_copy.kv")
+        # App.get_running_app().stop()
+        # return game1.Game1().run()
 
 
 class SettingScreen(Screen):

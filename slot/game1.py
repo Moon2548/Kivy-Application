@@ -8,7 +8,7 @@ import os
 Window.maximize()
 
 
-class Play(Widget):
+class Play1(Widget):
     def write(self):
         print("Play!")
 
@@ -19,7 +19,7 @@ class Play(Widget):
 
 class Game1(App):
     def build(self):
-        return Play()
+        return Play1()
 
 
 if __name__ == "__main__":

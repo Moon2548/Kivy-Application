@@ -7,13 +7,13 @@ from kivy.lang import Builder
 Window.maximize()
 
 
-class Play(Widget):
+class Play4(Widget):
     pass
 
 
 class Game4(App):
     def build(self):
-        return Play()
+        return Play4()
 
 
 if __name__ == "__main__":

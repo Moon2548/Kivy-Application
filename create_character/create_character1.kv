@@ -1,0 +1,40 @@
+<CreateCharacter1>:
+    BoxLayout:
+        id: test
+        size: root.width / 2 , root.height
+        pos: 0, 10000
+        canvas:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: root.my_source
+        GridLayout:
+            pos: 0,0
+            size_hint: 1 ,0.3 
+            cols: 3
+            Button:
+                text: root.my_source
+            Button:
+                text: '2'
+            Button:
+                text: '3'
+    GridLayout:
+        cols: 3
+        pos: root.width / 2, 0
+        size: root.width / 2 , root.height
+        Button:
+            text: 'Slime'
+            on_press: root.animate_slime(test)
+
+        Label:
+            text:'No character'
+        Label:
+            text:'No character'
+        Label:
+            text:'No character'
+        Label:
+            text:'No character'
+        Label:
+            text:'No character'
