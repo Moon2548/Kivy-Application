@@ -4,7 +4,9 @@ from kivy.core.window import Window
 from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.lang import Builder
 import os
+import sys
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 Window.maximize()
 
 

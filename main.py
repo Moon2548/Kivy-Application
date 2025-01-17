@@ -22,6 +22,9 @@ class PlayScreen(Screen):
                 Builder.load_file("create_character/create_character1.kv")
                 App.get_running_app().stop()
                 create_character1.CreateCharacterRun1().run()
+                if create_character1.CreateCharacter1().open_menu():
+                    print("true 5555")
+                    return MyApp().run()
         # with open("slot/slot1_copy.kv", "w") as f:
         #     f.write(copy)
         # Builder.load_file("slot/slot1_copy.kv")

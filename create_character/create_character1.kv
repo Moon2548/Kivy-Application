@@ -1,7 +1,7 @@
 <CreateCharacter1>:
     BoxLayout:
-        id: test
-        size: root.width / 2 , root.height
+        id: slime
+        size: root.width / 2 , root.height / 2
         pos: 0, 10000
         canvas:
             Color:
@@ -15,19 +15,22 @@
             size_hint: 1 ,0.3 
             cols: 3
             Button:
-                text: root.my_source
-            Button:
-                text: '2'
-            Button:
-                text: '3'
+                text: 'select'
+                on_press: root.select_slime()
+
     GridLayout:
         cols: 3
+        spacing: 20
         pos: root.width / 2, 0
         size: root.width / 2 , root.height
         Button:
             text: 'Slime'
-            on_press: root.animate_slime(test)
-
+            on_press: root.animate_slime(slime)
+            canvas:
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                    source: root.my_source
         Label:
             text:'No character'
         Label:
@@ -38,3 +41,17 @@
             text:'No character'
         Label:
             text:'No character'
+        Label:
+            text:'No character'
+        Label:
+            text:'No character'
+        Label:
+            text:'No character'
+    
+    Button:
+        text: 'back'
+        size: root.width * 0.1, root.height * 0.1
+        pos: root.width * 0.9, root.height * 0.9
+        on_press:
+            root.close_create()
+            root.open_menu()

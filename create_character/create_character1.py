@@ -29,6 +29,12 @@ class CreateCharacter1(Widget):
         animate = Animation(pos=(0, 0), duration=1)
         animate.start(widget)
 
+    def close_create(self):
+        App.get_running_app().stop()
+
+    def open_menu(self):
+        return True
+
 
 class CreateCharacterRun1(App):
     def build(self):
