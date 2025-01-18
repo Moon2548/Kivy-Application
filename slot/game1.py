@@ -47,6 +47,13 @@ class Play1(Widget):
         if "d" in self.pressed_keys:
             self.ids.object.pos[0] -= step
 
+    def close_play(self):
+        App.get_running_app().stop()
+        os.remove("slot/slot1_copy.kv")
+
+    def open_menu(self):
+        return True
+
 
 class Game1(App):
     def build(self):

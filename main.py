@@ -16,6 +16,9 @@ class Screenmanager(ScreenManager):
 
 
 class PlayScreen(Screen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
     def play_game1(self):
         with open("slot/slot1.kv", "r") as f:
             if "#status: free slot" in f.read():
@@ -31,7 +34,9 @@ class PlayScreen(Screen):
                     w.write(copy)
                 Builder.load_file("slot/slot1_copy.kv")
                 App.get_running_app().stop()
-                return game1.Game1().run()
+                game1.Game1().run()
+                if game1.Play1().open_menu():
+                    return MyApp().run()
 
 
 class SettingScreen(Screen):
