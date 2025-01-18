@@ -3,13 +3,15 @@
         id: slime
         size: root.width / 2 , root.height / 2
         pos: 0, 10000
-        canvas:
-            Color:
-                rgba: 1, 1, 1, 1
-            Rectangle:
-                pos: self.pos
-                size: self.size
-                source: root.my_source
+        Label:
+            text:'slime'
+            canvas:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                    source: root.my_source
         GridLayout:
             pos: 0,0
             size_hint: 1 ,0.3 
@@ -19,6 +21,7 @@
                 on_press: root.select_slime()
 
     GridLayout:
+        id: tribe
         cols: 3
         spacing: 20
         pos: root.width / 2, 0
@@ -47,6 +50,53 @@
             text:'No character'
         Label:
             text:'No character'
+    
+    BoxLayout:
+        id: swordsman
+        size: root.width / 2 , root.height / 2
+        pos: 0, 10000
+        canvas:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: ''
+        GridLayout:
+            pos: 0,0
+            size_hint: 1 ,0.3 
+            cols: 3
+            Button:
+                text: 'select'
+                on_press:
+                    root.select_sword()
+                    root.close_create()
+    
+    GridLayout:
+        id: role_select
+        cols: 3
+        spacing: 20
+        pos: 10000 , 10000
+        size: root.width / 2 , root.height
+        Button:
+            text: 'Swordsman'
+            on_press: root.animate_sword(swordsman)
+        Label:
+            text:'No class'
+        Label:
+            text:'No class'
+        Label:
+            text:'No class'
+        Label:
+            text:'No class'
+        Label:
+            text:'No class'
+        Label:
+            text:'No class'
+        Label:
+            text:'No class'
+        Label:
+            text:'No class'
     
     Button:
         text: 'back'
