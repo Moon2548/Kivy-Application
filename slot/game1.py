@@ -12,6 +12,21 @@ import os
 Window.maximize()
 
 
+def coliddes(rect1, rect2):
+    r1x = rect1[0][0]
+    r1y = rect1[0][1]
+    r2x = rect2[0][0]
+    r2y = rect2[0][1]
+    r1w = rect1[1][0]
+    r1h = rect1[1][1]
+    r2w = rect2[1][0]
+    r2h = rect2[1][1]
+
+    if r1x < r2x + r2w and r1x + r1w > r2x and r1y < r2y + r2h and r1y + r1h > r2y:
+        return True
+    return False
+
+
 class Play1(Widget):
     bullet_count = 0
     click = Window.width / 2, Window.height / 2
@@ -25,6 +40,7 @@ class Play1(Widget):
         self.pressed_keys = set()
         Clock.schedule_interval(self.update, 0)
         Clock.schedule_interval(self.bullet_move, 0)
+        Clock.schedule_interval(self.respawn_enemy, 1)
 
     def _on_keyboard_closed(self):
         self._keyboard.unbind(on_key_down=self._on_key_down)
@@ -43,20 +59,27 @@ class Play1(Widget):
             self.pressed_keys.remove(text)
 
     def update(self, dt):
-        step = 1000 * dt
+        step = 500 * dt
 
         if "w" in self.pressed_keys:
             self.ids.object.pos[1] -= step
             self.ids.bullet0.pos[1] -= step
+            self.ids.enemy.pos[1] -= step
+
         if "s" in self.pressed_keys:
             self.ids.object.pos[1] += step
             self.ids.bullet0.pos[1] += step
+            self.ids.enemy.pos[1] += step
+
         if "a" in self.pressed_keys:
             self.ids.object.pos[0] += step
             self.ids.bullet0.pos[0] += step
+            self.ids.enemy.pos[0] += step
+
         if "d" in self.pressed_keys:
             self.ids.object.pos[0] -= step
             self.ids.bullet0.pos[0] -= step
+            self.ids.enemy.pos[0] -= step
 
     def on_touch_down(self, touch):
         self.click = touch.pos
@@ -106,6 +129,18 @@ class Play1(Widget):
             )
             + self.ids.bullet0.pos
         )
+        if coliddes(
+            (self.ids.bullet0.pos, self.ids.bullet0.size),
+            (self.ids.enemy.pos, self.ids.enemy.size),
+        ):
+            self.ids.enemy.size = 0, 0
+            self.ids.enemy.c = 0
+
+    def respawn_enemy(self, dt):
+        self.ids.enemy.c += 1
+        print(self.ids.enemy.c)
+        if self.ids.enemy.c == 5:
+            self.ids.enemy.size = 100, 100
 
     def close_play(self):
         App.get_running_app().stop()

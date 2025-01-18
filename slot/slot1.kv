@@ -14,16 +14,6 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
-        BoxLayout:
-            orientation:'vertical'
-            id: bullet0
-            pos: 1000, 10000
-            canvas:
-                Color:
-                    rgba: 0, 1, 0, 1
-                Ellipse:
-                    pos: self.pos
-                    size: 20, 20
 
     BoxLayout:
         orientation:'vertical'
@@ -34,6 +24,32 @@
             Color:
                 rgba: 1, 0, 0, 1
             Rectangle:
+                pos: self.pos
+                size: self.size
+    
+    BoxLayout:
+        orientation:'vertical'
+        c: 0
+        id: enemy
+        pos: 0, 0
+        size: 100, 100
+        canvas:
+            Color:
+                rgba: 0.5, 0, 0, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+    
+    BoxLayout:
+        orientation:'vertical'
+        id: bullet0
+        pos: 1000, 10000
+        size_hint: None, None
+        size: 20, 20
+        canvas:
+            Color:
+                rgba: 0, 1, 0, 1
+            Ellipse:
                 pos: self.pos
                 size: self.size
 
