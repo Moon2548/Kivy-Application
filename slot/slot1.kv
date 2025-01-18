@@ -1,27 +1,27 @@
-#tribe: -
-#role: -
-#status: free slot
+#tribe: slime
+#role: sword
+#status: use slot
 
 
 <Play1>:
+    FloatLayout:
+        id: object
+        size: root.width, root.height
+        pos: 0,0
+        canvas:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
     BoxLayout:
         orientation:'vertical'
-        size: root.width, root.height
-        Button:
-            text: 'play'
-            on_press: root.write()
-        Button:
-            text:'save & exit'
-            on_press: root.close_app()
-        Carousel:
-            direction: 'right'
-            Label:
-                text:'1'
-            Label:
-                text:'2'
-            Label:
-                text:'3'
-            Label:
-                text:'4'
-            Label:
-                text:'5'
+        id: player
+        pos: root.width / 2 - 50, root.height / 2 - 50
+        size: 100, 100
+        canvas:
+            Color:
+                rgba: 1, 0, 0, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
