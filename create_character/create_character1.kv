@@ -52,7 +52,7 @@
             text:'No character'
     
     BoxLayout:
-        id: swordsman
+        id: ranger
         size: root.width / 2 , root.height / 2
         pos: 0, 10000
         canvas:
@@ -69,7 +69,7 @@
             Button:
                 text: 'select'
                 on_press:
-                    root.select_sword()
+                    root.select_ranger()
                     root.close_create()
     
     GridLayout:
@@ -79,8 +79,8 @@
         pos: 10000 , 10000
         size: root.width / 2 , root.height
         Button:
-            text: 'Swordsman'
-            on_press: root.animate_sword(swordsman)
+            text: 'Ranger'
+            on_press: root.animate_ranger(ranger)
         Label:
             text:'No class'
         Label:

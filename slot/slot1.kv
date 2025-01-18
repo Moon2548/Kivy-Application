@@ -1,5 +1,5 @@
 #tribe: slime
-#role: sword
+#role: ranger
 #status: use slot
 
 
@@ -10,10 +10,21 @@
         pos: 0,0
         canvas:
             Color:
-                rgba: 1, 1, 1, 1
+                rgba: 0, 0, 0.5, 0.5
             Rectangle:
                 pos: self.pos
                 size: self.size
+        BoxLayout:
+            orientation:'vertical'
+            id: bullet0
+            pos: 1000, 10000
+            canvas:
+                Color:
+                    rgba: 0, 1, 0, 1
+                Ellipse:
+                    pos: self.pos
+                    size: 20, 20
+
     BoxLayout:
         orientation:'vertical'
         id: player
@@ -25,7 +36,7 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
-    
+
     Button:
         text: 'exit'
         size: root.width * 0.1, root.height * 0.1

@@ -3,6 +3,7 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.lang import Builder
+from kivy.properties import StringProperty
 from slot import game1, game2, game3, game4, game5
 import create_character
 from create_character import create_character1

@@ -39,14 +39,14 @@ class CreateCharacter1(Widget):
         with open("slot/slot1.kv", "w") as f:
             f.write(update_tribe)
 
-    def animate_sword(self, widget, *args):
+    def animate_ranger(self, widget, *args):
         animate = Animation(pos=(0, 0), duration=1)
         animate.start(widget)
 
-    def select_sword(self):
+    def select_ranger(self):
         with open("slot/slot1.kv", "r") as f:
             tribe = f.read()
-        update_tribe = tribe.replace("#role: -", "#role: sword")
+        update_tribe = tribe.replace("#role: -", "#role: ranger")
         with open("slot/slot1.kv", "w") as f:
             f.write(update_tribe)
         with open("slot/slot1.kv", "r") as f:
