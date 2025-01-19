@@ -10,13 +10,21 @@
         pos: 0,0
         canvas:
             Color:
-                rgba: 1, 1, 1, 1
+                rgba: 0, 0, 0.5, 0.5
             Rectangle:
                 pos: self.pos
                 size: self.size
+
     BoxLayout:
         orientation:'vertical'
         id: player
+        hp: 10
+        mana: 100
+        lv: 1
+        str: 1
+        int: 1
+        agi: 1
+        vit: 1
         pos: root.width / 2 - 50, root.height / 2 - 50
         size: 100, 100
         canvas:
@@ -26,6 +34,32 @@
                 pos: self.pos
                 size: self.size
     
+    BoxLayout:
+        orientation:'vertical'
+        id: enemy
+        c: 0
+        pos: 0, 0
+        size: 100, 100
+        canvas:
+            Color:
+                rgba: 0.5, 0, 0, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+    BoxLayout:
+        orientation:'vertical'
+        id: bullet0
+        pos: 10000, 10000
+        size_hint: None, None
+        size: 20, 20
+        canvas:
+            Color:
+                rgba: 0, 1, 0, 1
+            Ellipse:
+                pos: self.pos
+                size: self.size
+
     Button:
         text: 'exit'
         size: root.width * 0.1, root.height * 0.1

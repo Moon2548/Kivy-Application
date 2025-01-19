@@ -18,6 +18,13 @@
     BoxLayout:
         orientation:'vertical'
         id: player
+        hp: 10
+        mana: 100
+        lv: 1
+        str: 1
+        int: 1
+        agi: 1
+        vit: 1
         pos: root.width / 2 - 50, root.height / 2 - 50
         size: 100, 100
         canvas:
@@ -29,8 +36,9 @@
     
     BoxLayout:
         orientation:'vertical'
-        c: 0
         id: enemy
+        c: -1000000
+        hp: 5
         pos: 0, 0
         size: 100, 100
         canvas:
@@ -39,11 +47,15 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
-    
+    ProgressBar:
+        max: 5
+        value: enemy.hp
+        pos: enemy.pos[0], enemy.pos[1] + 70
+
     BoxLayout:
         orientation:'vertical'
         id: bullet0
-        pos: 1000, 10000
+        pos: 10000, 10000
         size_hint: None, None
         size: 20, 20
         canvas:

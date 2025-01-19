@@ -24,10 +24,12 @@
             AccordionItem:
                 title: 'slot 1'
                 BoxLayout:
-                    horizontal: 'vertical'
+                    orientation: 'vertical'
                     Label:
                         text:'slot 1'
                         font_size: 32
+                        size_hint: 0.5, 0.5
+                        pos_hint: {'center_x':0.5, 'center_y':0.5}
                         canvas.before:
                             Color:
                                 rgba: 1, 0, 0, 1
@@ -36,6 +38,9 @@
                                 pos: self.pos
                     Button:
                         text: 'new game'
+                        on_press: root.play_game1()
+                    Button:
+                        text: 'continue'
                         on_press: root.play_game1()
 
             AccordionItem:

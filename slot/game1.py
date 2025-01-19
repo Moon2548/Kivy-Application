@@ -7,6 +7,7 @@ from kivy.clock import Clock
 from kivy.graphics import Ellipse
 from kivy.uix.boxlayout import BoxLayout
 from kivy.vector import Vector
+from kivy.animation import Animation
 import os
 
 Window.maximize()
@@ -28,8 +29,7 @@ def coliddes(rect1, rect2):
 
 
 class Play1(Widget):
-    bullet_count = 0
-    click = Window.width / 2, Window.height / 2
+    click = Window.width / 2 - 10, Window.height / 2 - 10
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -40,7 +40,7 @@ class Play1(Widget):
         self.pressed_keys = set()
         Clock.schedule_interval(self.update, 0)
         Clock.schedule_interval(self.bullet_move, 0)
-        Clock.schedule_interval(self.respawn_enemy, 1)
+        Clock.schedule_interval(self.clock_count, 1)
 
     def _on_keyboard_closed(self):
         self._keyboard.unbind(on_key_down=self._on_key_down)
@@ -83,49 +83,18 @@ class Play1(Widget):
 
     def on_touch_down(self, touch):
         self.click = touch.pos
-        self.ids.bullet0.pos = Window.width / 2, Window.height / 2
-        # with open("slot/slot1_copy.kv", "r") as f:
-        #     a = f.read()
-        #     update_a = a.replace(
-        #         f"""        BoxLayout:
-        #     orientation:'vertical'
-        #     id: bullet{self.bullet_count}
-        #     canvas:
-        #         Color:
-        #             rgba: 0, 1, 0, 1
-        #         Ellipse:
-        #             pos: 10000, 10000
-        #             size: 20, 20""",
-        #         f"""        BoxLayout:
-        #     orientation:'vertical'
-        #     id: bullet{self.bullet_count}
-        #     canvas:
-        #         Color:
-        #             rgba: 0, 1, 0, 1
-        #         Ellipse:
-        #             pos: 10000, 10000
-        #             size: 20, 20
-        # BoxLayout:
-        #     orientation:'vertical'
-        #     id: bullet{self.bullet_count + 1}
-        #     canvas:
-        #         Color:
-        #             rgba: 0, 1, 0, 1
-        #         Ellipse:
-        #             pos: 10000, 10000
-        #             size: 20, 20""",
-        #     )
-        # with open("slot/slot1_copy.kv", "w") as f:
-        #     f.write(update_a)
-        # self.bullet_count += 1
+        self.ids.bullet0.pos = Window.width / 2 - 10, Window.height / 2 - 10
+        self.ids.bullet0.size = 20, 20
+        bullet_ani = Animation(size=(0, 0), duration=2)
+        bullet_ani.start(self.ids.bullet0)
         return super().on_touch_down(touch)
 
     def bullet_move(self, dt):
         step = 100
         self.ids.bullet0.pos = (
             Vector(
-                (self.click[0] - self.ids.player.pos[0]) / step,
-                (self.click[1] - self.ids.player.pos[1]) / step,
+                (self.click[0] - Window.width / 2 - 10) / step,
+                (self.click[1] - Window.height / 2 - 10) / step,
             )
             + self.ids.bullet0.pos
         )
@@ -133,14 +102,20 @@ class Play1(Widget):
             (self.ids.bullet0.pos, self.ids.bullet0.size),
             (self.ids.enemy.pos, self.ids.enemy.size),
         ):
-            self.ids.enemy.size = 0, 0
-            self.ids.enemy.c = 0
+            self.ids.bullet0.pos = 100000, 100000
+            self.ids.enemy.hp -= 1
+            if self.ids.enemy.hp == 0:
+                self.ids.enemy.c = 0
+                self.ids.enemy.size = 0, 0
+                self.ids.enemy.pos = 100000, 100000
 
-    def respawn_enemy(self, dt):
+    def clock_count(self, dt):
         self.ids.enemy.c += 1
         print(self.ids.enemy.c)
         if self.ids.enemy.c == 5:
             self.ids.enemy.size = 100, 100
+            self.ids.enemy.pos = self.ids.object.pos
+            self.ids.enemy.hp = 5
 
     def close_play(self):
         App.get_running_app().stop()
