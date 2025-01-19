@@ -18,8 +18,12 @@
     BoxLayout:
         orientation:'vertical'
         id: player
+        hp_m: 10
         hp: 10
-        mana: 100
+        mp_m: 100
+        mp: 100
+        xp_m: 30
+        xp: 0
         lv: 1
         str: 1
         int: 1
@@ -64,6 +68,81 @@
             Ellipse:
                 pos: self.pos
                 size: self.size
+
+    BoxLayout:
+        orientation: 'vertical'
+        id: hp_m_bar
+        pos: 0, root.height *0.95
+        size: root.width * 0.2, root.height * 0.05
+        canvas:
+            Color: 
+                rgba: 0.5, 0.5, 0.5, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        BoxLayout:
+            orientation:'vertical'
+            id: hp_bar
+            pos: self.pos
+            size_hint: player.hp / player.hp_m, 1
+            canvas:
+                Color:
+                    rgba: 1, 0, 0, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+                text: 'HP: 100%'
+
+    BoxLayout:
+        orientation: 'vertical'
+        id: mp_m_bar
+        pos: 0, root.height *0.9
+        size: root.width * 0.2, root.height * 0.05
+        canvas:
+            Color: 
+                rgba: 0.5, 0.5, 0.5, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        BoxLayout:
+            orientation:'vertical'
+            id: mp_bar
+            pos: self.pos
+            size_hint: player.mp / player.mp_m, 1
+            canvas:
+                Color:
+                    rgba: 0, 0, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+                text: 'MP: 100%'
+
+    BoxLayout:
+        orientation: 'vertical'
+        id: xp_m_bar
+        pos: 0, root.height *0.85
+        size: root.width * 0.2, root.height * 0.05
+        canvas:
+            Color: 
+                rgba: 0.5, 0.5, 0.5, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        BoxLayout:
+            orientation:'vertical'
+            id: xp_bar
+            pos: self.pos
+            size_hint: player.xp / player.xp_m, 1
+            canvas:
+                Color:
+                    rgba: 1, 1, 0, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+                text: 'MP: 100%'
 
     Button:
         text: 'exit'

@@ -18,7 +18,9 @@
     BoxLayout:
         orientation:'vertical'
         id: player
+        hp_m: 10
         hp: 10
+        mana_m: 100
         mana: 100
         lv: 1
         str: 1
@@ -37,7 +39,8 @@
     BoxLayout:
         orientation:'vertical'
         id: enemy
-        c: 0
+        c: -1000000
+        hp: 5
         pos: 0, 0
         size: 100, 100
         canvas:
@@ -46,6 +49,10 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
+    ProgressBar:
+        max: 5
+        value: enemy.hp
+        pos: enemy.pos[0], enemy.pos[1] + 70
 
     BoxLayout:
         orientation:'vertical'
