@@ -16,7 +16,7 @@
                 size: self.size
 
     BoxLayout:
-        orientation:'vertical'
+        orientation: 'vertical'
         id: player
         hp_m: 10
         hp: 10
@@ -39,9 +39,9 @@
                 size: self.size
     
     BoxLayout:
-        orientation:'vertical'
+        orientation: 'vertical'
         id: enemy
-        c: -1000000
+        c: 6
         hp: 5
         pos: 0, 0
         size: 100, 100
@@ -57,7 +57,7 @@
         pos: enemy.pos[0], enemy.pos[1] + 70
 
     BoxLayout:
-        orientation:'vertical'
+        orientation: 'vertical'
         id: bullet0
         pos: 10000, 10000
         size_hint: None, None
@@ -69,8 +69,7 @@
                 pos: self.pos
                 size: self.size
 
-    BoxLayout:
-        orientation: 'vertical'
+    Widget:
         id: hp_m_bar
         pos: 0, root.height *0.95
         size: root.width * 0.2, root.height * 0.05
@@ -81,21 +80,23 @@
                 pos: self.pos
                 size: self.size
         BoxLayout:
-            orientation:'vertical'
+            orientation: 'vertical'
             id: hp_bar
-            pos: self.pos
-            size_hint: player.hp / player.hp_m, 1
+            pos: hp_m_bar.pos
+            size: (player.hp / player.hp_m) * hp_m_bar.size[0], hp_m_bar.size[1]
             canvas:
                 Color:
                     rgba: 1, 0, 0, 1
                 Rectangle:
                     pos: self.pos
                     size: self.size
-            Label:
-                text: 'HP: 100%'
+        Label:
+            text: 'HP: 100%'
+            size: hp_m_bar.size
+            color: 0, 0, 0, 1
+            pos: hp_m_bar.pos
 
-    BoxLayout:
-        orientation: 'vertical'
+    Widget:
         id: mp_m_bar
         pos: 0, root.height *0.9
         size: root.width * 0.2, root.height * 0.05
@@ -106,21 +107,23 @@
                 pos: self.pos
                 size: self.size
         BoxLayout:
-            orientation:'vertical'
+            orientation: 'vertical'
             id: mp_bar
-            pos: self.pos
-            size_hint: player.mp / player.mp_m, 1
+            pos: mp_m_bar.pos
+            size: (player.mp / player.mp_m) * mp_m_bar.size[0], mp_m_bar.size[1]
             canvas:
                 Color:
                     rgba: 0, 0, 1, 1
                 Rectangle:
                     pos: self.pos
                     size: self.size
-            Label:
-                text: 'MP: 100%'
+        Label:
+            text: 'MP: 100%'
+            size: mp_m_bar.size
+            color: 0, 0, 0, 1
+            pos: mp_m_bar.pos
 
-    BoxLayout:
-        orientation: 'vertical'
+    Widget:
         id: xp_m_bar
         pos: 0, root.height *0.85
         size: root.width * 0.2, root.height * 0.05
@@ -131,18 +134,21 @@
                 pos: self.pos
                 size: self.size
         BoxLayout:
-            orientation:'vertical'
+            orientation: 'vertical'
             id: xp_bar
-            pos: self.pos
-            size_hint: player.xp / player.xp_m, 1
+            pos: xp_m_bar.pos
+            size: (player.xp / player.xp_m) * xp_m_bar.size[0], xp_m_bar.size[1]
             canvas:
                 Color:
                     rgba: 1, 1, 0, 1
                 Rectangle:
                     pos: self.pos
                     size: self.size
-            Label:
-                text: 'MP: 100%'
+        Label:
+            text: 'XP: 0%'
+            size: xp_m_bar.size
+            color: 0, 0, 0, 1
+            pos: xp_m_bar.pos
 
     Button:
         text: 'exit'
