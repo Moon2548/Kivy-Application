@@ -83,7 +83,7 @@
             orientation: 'vertical'
             id: hp_bar
             pos: hp_m_bar.pos
-            size: (player.hp / player.hp_m) * hp_m_bar.size[0], hp_m_bar.size[1]
+            size: (player.hp / (player.hp_m + 10 ** (-100))) * hp_m_bar.size[0], hp_m_bar.size[1]
             canvas:
                 Color:
                     rgba: 1, 0, 0, 1
@@ -110,7 +110,7 @@
             orientation: 'vertical'
             id: mp_bar
             pos: mp_m_bar.pos
-            size: (player.mp / player.mp_m) * mp_m_bar.size[0], mp_m_bar.size[1]
+            size: (player.mp / (player.mp_m + 10 ** (-100))) * mp_m_bar.size[0], mp_m_bar.size[1]
             canvas:
                 Color:
                     rgba: 0, 0, 1, 1
@@ -137,7 +137,7 @@
             orientation: 'vertical'
             id: xp_bar
             pos: xp_m_bar.pos
-            size: (player.xp / player.xp_m) * xp_m_bar.size[0], xp_m_bar.size[1]
+            size: (player.xp / (player.xp_m + 10 ** (-100))) * xp_m_bar.size[0], xp_m_bar.size[1]
             canvas:
                 Color:
                     rgba: 1, 1, 0, 1

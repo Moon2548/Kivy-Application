@@ -20,23 +20,15 @@ class PlayScreen(Screen):
         super().__init__(**kwargs)
 
     def play_game1(self):
-        with open("slot/slot1.kv", "r") as f:
-            if "#status: free slot" in f.read():
-                Builder.load_file("create_character/create_character1.kv")
-                App.get_running_app().stop()
-                create_character1.CreateCharacterRun1().run()
-                if create_character1.CreateCharacter1().open_menu():
-                    return MyApp().run()
-            else:
-                with open("slot/slot1.kv", "r") as r:
-                    copy = r.read()
-                with open("slot/slot1_copy.kv", "w") as w:
-                    w.write(copy)
-                Builder.load_file("slot/slot1_copy.kv")
-                App.get_running_app().stop()
-                game1.Game1().run()
-                if game1.Play1().open_menu():
-                    return MyApp().run()
+        with open("slot/slot1.kv", "r") as r:
+            copy = r.read()
+        with open("slot/slot1_copy.kv", "w") as w:
+            w.write(copy)
+        Builder.load_file("slot/slot1_copy.kv")
+        App.get_running_app().stop()
+        game1.Game1().run()
+        if game1.Play1().open_menu():
+            return MyApp().run()
 
 
 class SettingScreen(Screen):
