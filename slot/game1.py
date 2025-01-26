@@ -124,28 +124,28 @@ class Play1(Widget):
 
         if "w" in self.pressed_keys:
             self.ids.object.pos[1] -= step
-            self.ids.floor.pos[1] -= step
+            self.ids.dungeon.pos[1] -= step
             self.frame_slime += 0.1
             if self.frame_slime >= 4:
                 self.frame_slime = 0
             self.my_source = self.imagess + self.slimes_w[int(self.frame_slime)]
         if "s" in self.pressed_keys:
             self.ids.object.pos[1] += step
-            self.ids.floor.pos[1] += step
+            self.ids.dungeon.pos[1] += step
             self.frame_slime += 0.1
             if self.frame_slime >= 4:
                 self.frame_slime = 0
             self.my_source = self.imagess + self.slimes_s[int(self.frame_slime)]
         if "a" in self.pressed_keys:
             self.ids.object.pos[0] += step
-            self.ids.floor.pos[0] += step
+            self.ids.dungeon.pos[0] += step
             self.frame_slime += 0.1
             if self.frame_slime >= 4:
                 self.frame_slime = 0
             self.my_source = self.imagess + self.slimes_a[int(self.frame_slime)]
         if "d" in self.pressed_keys:
             self.ids.object.pos[0] -= step
-            self.ids.floor.pos[0] -= step
+            self.ids.dungeon.pos[0] -= step
             self.frame_slime += 0.1
             if self.frame_slime >= 4:
                 self.frame_slime = 0
@@ -208,7 +208,7 @@ class Play1(Widget):
 
     def start(self):
         self.ids.object.pos = 100000, 1000000
-        self.ids.floor.pos = 0, 0
+        self.ids.dungeon.pos = 0, 0
 
     def close_play(self):
         App.get_running_app().stop()
