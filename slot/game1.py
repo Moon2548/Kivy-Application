@@ -32,6 +32,7 @@ def coliddes(rect1, rect2):
 class Play1(Widget):
 
     my_source = StringProperty("")
+    my_portal = StringProperty("")
     imagess = "image/"
     slimes_s = [
         "slime/slime_02.png",
@@ -57,7 +58,19 @@ class Play1(Widget):
         "slime/slime_20.png",
         "slime/slime_21.png",
     ]
-    frame_count = 0
+    portal = [
+        "portal/0.png",
+        "portal/1.png",
+        "portal/2.png",
+        "portal/3.png",
+        "portal/4.png",
+        "portal/5.png",
+        "portal/6.png",
+        "portal/7.png",
+        "portal/8.png",
+    ]
+    frame_slime = 0
+    frame_portal = 0
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -87,28 +100,33 @@ class Play1(Widget):
         step = 500 * dt
         if "w" in self.pressed_keys:
             self.ids.object.pos[1] -= step
-            self.frame_count += 0.1
-            if self.frame_count >= 4:
-                self.frame_count = 0
-            self.my_source = self.imagess + self.slimes_w[int(self.frame_count)]
+            self.frame_slime += 0.1
+            if self.frame_slime >= 4:
+                self.frame_slime = 0
+            self.my_source = self.imagess + self.slimes_w[int(self.frame_slime)]
         if "s" in self.pressed_keys:
             self.ids.object.pos[1] += step
-            self.frame_count += 0.1
-            if self.frame_count >= 4:
-                self.frame_count = 0
-            self.my_source = self.imagess + self.slimes_s[int(self.frame_count)]
+            self.frame_slime += 0.1
+            if self.frame_slime >= 4:
+                self.frame_slime = 0
+            self.my_source = self.imagess + self.slimes_s[int(self.frame_slime)]
         if "a" in self.pressed_keys:
             self.ids.object.pos[0] += step
-            self.frame_count += 0.1
-            if self.frame_count >= 4:
-                self.frame_count = 0
-            self.my_source = self.imagess + self.slimes_a[int(self.frame_count)]
+            self.frame_slime += 0.1
+            if self.frame_slime >= 4:
+                self.frame_slime = 0
+            self.my_source = self.imagess + self.slimes_a[int(self.frame_slime)]
         if "d" in self.pressed_keys:
             self.ids.object.pos[0] -= step
-            self.frame_count += 0.1
-            if self.frame_count >= 4:
-                self.frame_count = 0
-            self.my_source = self.imagess + self.slimes_d[int(self.frame_count)]
+            self.frame_slime += 0.1
+            if self.frame_slime >= 4:
+                self.frame_slime = 0
+            self.my_source = self.imagess + self.slimes_d[int(self.frame_slime)]
+
+        self.frame_portal += 0.1
+        if self.frame_portal >= 9:
+            self.frame_portal = 0
+        self.my_portal = self.imagess + self.portal[int(self.frame_portal)]
 
     def on_touch_down(self, touch):
         bullet = Widget(

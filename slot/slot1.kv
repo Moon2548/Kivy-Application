@@ -26,6 +26,17 @@
             max: 5
             value: dummy.hp
             pos: dummy.pos[0], dummy.pos[1] + 70
+        BoxLayout:
+            orientation:'vertical'
+            id: portal
+            size: 300, 300
+            pos: object.pos[0] + object.size[0] / 2, object.pos[1] + object.size[1] - 100
+            canvas:
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                    source: root.my_portal
+
 
     BoxLayout:
         orientation: 'vertical'
