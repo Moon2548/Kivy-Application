@@ -33,6 +33,7 @@ class Play1(Widget):
 
     my_source = StringProperty("")
     my_portal = StringProperty("")
+    my_dummy = StringProperty("")
     imagess = "image/"
     slimes_s = [
         "slime/slime_02.png",
@@ -69,8 +70,15 @@ class Play1(Widget):
         "portal/7.png",
         "portal/8.png",
     ]
+    dummy = [
+        "dummy/0.png",
+        "dummy/1.png",
+        "dummy/2.png",
+        "dummy/3.png",
+    ]
     frame_slime = 0
     frame_portal = 0
+    frame_dummy = 0
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -127,6 +135,11 @@ class Play1(Widget):
         if self.frame_portal >= 9:
             self.frame_portal = 0
         self.my_portal = self.imagess + self.portal[int(self.frame_portal)]
+
+        self.frame_dummy += 0.1
+        if self.frame_dummy >= 4:
+            self.frame_dummy = 0
+        self.my_dummy = self.imagess + self.dummy[int(self.frame_dummy)]
 
     def on_touch_down(self, touch):
         bullet = Widget(

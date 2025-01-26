@@ -16,11 +16,10 @@
             pos: object.pos[0] + 100, object.pos[1] + 100
             size: 100, 100
             canvas:
-                Color:
-                    rgba: 0.5, 0, 0, 1
                 Rectangle:
                     pos: self.pos
                     size: self.size
+                    source: root.my_dummy
         ProgressBar:
             max: 5
             value: dummy.hp
