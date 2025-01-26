@@ -35,6 +35,16 @@
                     size: self.size
                     source: root.my_portal
 
+    Widget:
+        id: dungeon
+        size: root.width, root.height
+        pos: 100000, 100000
+        canvas:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'image/background/stone.jpg'
+
 
     BoxLayout:
         orientation: 'vertical'
