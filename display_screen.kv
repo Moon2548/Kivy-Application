@@ -155,6 +155,14 @@
 
 <MainScreen>:
     name: 'main'
+    BoxLayout:
+        pos: 0, 0
+        size: root.width, root.height
+        canvas:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'image/background/menu_background.jpg'
     Label:
         text:'Slime'
         pos: 0, root.height * 0.5
