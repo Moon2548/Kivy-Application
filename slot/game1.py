@@ -4,7 +4,7 @@ from kivy.core.window import Window
 from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.lang import Builder
 from kivy.clock import Clock
-from kivy.graphics import Ellipse, Color
+from kivy.graphics import Ellipse, Color, Rectangle
 from kivy.uix.boxlayout import BoxLayout
 from kivy.vector import Vector
 from kivy.animation import Animation
@@ -31,7 +31,7 @@ def coliddes(rect1, rect2):
 
 
 class Play1(Widget):
-
+    play_game = False
     my_source = StringProperty("")
     my_portal = StringProperty("")
     my_dummy = StringProperty("")
@@ -88,9 +88,12 @@ class Play1(Widget):
         self._keyboard.bind(on_key_up=self._on_key_up)
         self.pressed_keys = set()
         self.bullets = []
+        self.mushrooms = []
         Clock.schedule_interval(self.update, 0)
         Clock.schedule_interval(self.bullet_move, 0)
         Clock.schedule_interval(self.clock_count, 1)
+        Clock.schedule_interval(self.spawn_mushroom, 2)
+        Clock.schedule_interval(self.move_mushrooms, 0)
 
     def _on_keyboard_closed(self):
         self._keyboard.unbind(on_key_down=self._on_key_down)
@@ -178,10 +181,36 @@ class Play1(Widget):
         )
         return super().on_touch_down(touch)
 
+    def spawn_mushroom(self, dt):
+        if self.play_game:
+            mushroom = Widget(
+                size=(100, 100),
+                pos=(self.ids.dungeon.pos[0] + 50, self.ids.dungeon.pos[1] + 50),
+            )
+            with mushroom.canvas:
+                Color(1, 1, 1, 1)
+                mushroom.shape = Rectangle(
+                    pos=mushroom.pos, size=mushroom.size, source="image/mushroom/1.png"
+                )
+            self.add_widget(mushroom)
+            self.mushrooms.append(mushroom)
+
+    def move_mushrooms(self, dt):
+        player_pos = self.ids.player.pos
+        speed = 2
+
+        for mushroom in self.mushrooms:
+            mushroom_pos = mushroom.pos
+            direction = Vector(player_pos) - Vector(mushroom_pos)
+            if direction.length() > 1:
+                direction = direction.normalize() * speed
+                mushroom.pos = Vector(mushroom.pos) + direction
+                mushroom.shape.pos = mushroom.pos
+
     def bullet_move(self, dt):
         for bullet, velocity in self.bullets[:]:
             bullet.pos = Vector(*bullet.pos) + velocity
-            bullet.shape.pos = bullet.pos  # อัปเดตตำแหน่งของ Ellipse
+            bullet.shape.pos = bullet.pos
             if coliddes(
                 (bullet.pos, bullet.size), (self.ids.dummy.pos, self.ids.dummy.size)
             ):
@@ -192,6 +221,15 @@ class Play1(Widget):
                     self.ids.dummy.c = 0
                     self.ids.dummy.size = (0, 0)
                     self.ids.dummy.pos = (100000, 100000)
+            for mushroom in self.mushrooms[:]:
+                if coliddes(
+                    (bullet.pos, bullet.size),
+                    (mushroom.pos, mushroom.size),
+                ):
+                    self.remove_widget(bullet)
+                    self.bullets.remove((bullet, velocity))
+                    self.remove_widget(mushroom)
+                    self.mushrooms.remove(mushroom)
 
     def clock_count(self, dt):
         self.ids.dummy.c += 1
@@ -207,6 +245,7 @@ class Play1(Widget):
             self.ids.dummy.hp = 5
 
     def start(self):
+        self.play_game = True
         self.ids.object.pos = 100000, 1000000
         self.ids.dungeon.pos = 0, 0
 
