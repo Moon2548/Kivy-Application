@@ -8,6 +8,7 @@ from kivy.graphics import Ellipse, Color
 from kivy.uix.boxlayout import BoxLayout
 from kivy.vector import Vector
 from kivy.animation import Animation
+from kivy.uix.button import Button
 from kivy.properties import StringProperty, ObjectProperty
 import os
 
@@ -106,6 +107,21 @@ class Play1(Widget):
 
     def update(self, dt):
         step = 500 * dt
+
+        if (
+            coliddes(
+                (self.ids.player.pos, self.ids.player.size),
+                (self.ids.portal.pos, self.ids.portal.size),
+            )
+            == True
+        ):
+            self.ids.play.pos = (
+                self.ids.portal.pos[0] + 100,
+                self.ids.portal.pos[1] + 100,
+            )
+        else:
+            self.ids.play.pos = (100000, 100000)
+
         if "w" in self.pressed_keys:
             self.ids.object.pos[1] -= step
             self.frame_slime += 0.1
@@ -175,10 +191,19 @@ class Play1(Widget):
 
     def clock_count(self, dt):
         self.ids.dummy.c += 1
+        print(
+            coliddes(
+                (self.ids.player.pos, self.ids.player.size),
+                (self.ids.portal.pos, self.ids.portal.size),
+            )
+        )
         if self.ids.dummy.c == 5:
             self.ids.dummy.size = (100, 100)
             self.ids.dummy.pos = self.ids.object.pos
             self.ids.dummy.hp = 5
+
+    def start(self):
+        pass
 
     def close_play(self):
         App.get_running_app().stop()

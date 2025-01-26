@@ -18,7 +18,7 @@
             canvas:
                 Rectangle:
                     pos: self.pos
-                    size: self.size
+                    size: self.size[0] * 1.5, self.size[1] * 1.5
                     source: root.my_dummy
         ProgressBar:
             max: 5
@@ -141,6 +141,22 @@
             color: 0, 0, 0, 1
             pos: xp_m_bar.pos
 
+        Widget:
+            id: level_bar
+            pos: 0, root.height *0.8
+            size: root.width * 0.2, root.height * 0.05
+            canvas:
+                Color: 
+                    rgba: 0, 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+                text: 'Level: 1'
+                size: level_bar.size
+                color: 0, 0, 0, 1
+                pos: level_bar.pos
+
     Button:
         text: 'exit'
         size: root.width * 0.1, root.height * 0.1
@@ -148,3 +164,10 @@
         on_press:
             root.close_play()
             root.open_menu()
+
+    Button:
+        text: 'play'
+        id: play
+        size: 100, 100
+        pos: 100000, 100000
+        on_press: root.start()
