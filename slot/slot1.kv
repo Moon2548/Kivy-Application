@@ -1,10 +1,5 @@
-#tribe: slime
-#role: ranger
-#status: use slot
-
-
 <Play1>:
-    FloatLayout:
+    Widget:
         id: object
         size: root.width, root.height
         pos: 0,0
@@ -14,6 +9,23 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
+        BoxLayout:
+            orientation: 'vertical'
+            id: dummy
+            c: 6
+            hp: 5
+            pos: object.pos[0] + 100, object.pos[1] + 100
+            size: 100, 100
+            canvas:
+                Color:
+                    rgba: 0.5, 0, 0, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        ProgressBar:
+            max: 5
+            value: dummy.hp
+            pos: dummy.pos[0], dummy.pos[1] + 70
 
     BoxLayout:
         orientation: 'vertical'
@@ -33,41 +45,11 @@
         size: 100, 100
         canvas:
             Color:
-                rgba: 1, 0, 0, 1
+                rgba: 1, 1, 1, 1
             Rectangle:
                 pos: self.pos
                 size: self.size
-    
-    BoxLayout:
-        orientation: 'vertical'
-        id: enemy
-        c: 6
-        hp: 5
-        pos: 0, 0
-        size: 100, 100
-        canvas:
-            Color:
-                rgba: 0.5, 0, 0, 1
-            Rectangle:
-                pos: self.pos
-                size: self.size
-    ProgressBar:
-        max: 5
-        value: enemy.hp
-        pos: enemy.pos[0], enemy.pos[1] + 70
-
-    BoxLayout:
-        orientation: 'vertical'
-        id: bullet0
-        pos: 10000, 10000
-        size_hint: None, None
-        size: 20, 20
-        canvas:
-            Color:
-                rgba: 0, 1, 0, 1
-            Ellipse:
-                pos: self.pos
-                size: self.size
+                source: root.my_source
 
     Widget:
         id: hp_m_bar
